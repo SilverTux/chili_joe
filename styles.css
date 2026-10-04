@@ -78,12 +78,89 @@ a:focus-visible {
   text-decoration: none;
 }
 
+.topline-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
 .topline p span {
   padding-inline: 8px;
 }
 
 .topline a {
   white-space: nowrap;
+}
+
+.language-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.language-flags {
+  display: inline-flex;
+  align-items: center;
+}
+
+.language-flag {
+  width: 17px;
+  height: 12px;
+  display: block;
+  border: 1px solid rgb(11 36 65 / 25%);
+  box-shadow: 0 1px 2px rgb(11 36 65 / 14%);
+}
+
+.language-flag[hidden] {
+  display: none;
+}
+
+.language-picker::after {
+  position: absolute;
+  right: 7px;
+  color: var(--navy-deep);
+  content: "⌄";
+  font-size: 10px;
+  pointer-events: none;
+}
+
+.language-picker select {
+  min-width: 48px;
+  height: 25px;
+  padding: 2px 19px 2px 7px;
+  appearance: none;
+  border: 1px solid rgb(11 36 65 / 50%);
+  border-radius: 0;
+  color: var(--navy-deep);
+  background: transparent;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  cursor: pointer;
+}
+
+.language-picker select:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 2px;
+}
+
+.language-picker option {
+  color: var(--navy-deep);
+  background: var(--paper);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+  border: 0;
 }
 
 .nav-wrap {
@@ -495,7 +572,7 @@ a:focus-visible {
   letter-spacing: .16em;
 }
 
-.menu-board-photo figcaption span {
+.menu-board-photo figcaption .caption-spark {
   color: var(--yellow);
   font-size: 15px;
 }
@@ -944,8 +1021,8 @@ a:focus-visible {
   .topline {
     min-height: 31px;
     padding-inline: 18px;
-    font-size: 8px;
-    letter-spacing: .09em;
+    font-size: 7px;
+    letter-spacing: .06em;
   }
 
   .topline p span {
@@ -954,6 +1031,17 @@ a:focus-visible {
 
   .topline a {
     display: none;
+  }
+
+  .topline-actions {
+    margin-left: 8px;
+  }
+
+  .language-picker select {
+    min-width: 43px;
+    height: 23px;
+    padding-left: 5px;
+    font-size: 8px;
   }
 
   .nav-wrap {
