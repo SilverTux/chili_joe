@@ -3,182 +3,405 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#12345b">
+    <meta name="theme-color" content="#ffffff">
     <meta name="description" content="Meet Chili Joe's: Nashville-style hot chicken, your heat, and a whole lot of Budapest color." data-i18n-meta="description">
     <title>Chili Joe's — Nashville Heat, Budapest Soul</title>
+    <script>
+      (() => {
+        let theme = null;
+        try {
+          theme = localStorage.getItem("chili-joes-theme");
+        } catch {
+          // Fall back to the system preference when browser storage is unavailable.
+        }
+        if (theme !== "dark" && theme !== "light") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preload" href="assets/fonts/knewave-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/bangers-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <script src="language.js" defer></script>
+    <script src="theme.js" defer></script>
   </head>
   <body>
-    <header class="site-header">
-      <div class="topline">
-        <p data-i18n-html="topline">NASHVILLE-STYLE HOT CHICKEN <span aria-hidden="true">✳</span> BUDAPEST, HUNGARY</p>
-        <div class="topline-actions">
-          <a href="#visit"><span data-i18n="topHello">Come say hi</span> <span aria-hidden="true">↗</span></a>
-          <label class="language-picker">
-            <span class="sr-only" data-i18n="languageLabel">Select language</span>
-            <span class="language-flags" aria-hidden="true">
-              <svg class="language-flag" data-language-flag="en" viewBox="0 0 60 40" focusable="false">
-                <rect width="60" height="40" fill="#012169"/>
-                <path d="M0 0 60 40M60 0 0 40" stroke="#fff" stroke-width="10"/>
-                <path d="M0 0 60 40M60 0 0 40" stroke="#c8102e" stroke-width="4"/>
-                <path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="16"/>
-                <path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="8"/>
-              </svg>
-              <svg class="language-flag" data-language-flag="hu" viewBox="0 0 60 40" hidden focusable="false">
-                <rect width="60" height="40" fill="#fff"/>
-                <path d="M0 0h60v13.34H0z" fill="#ce2939"/>
-                <path d="M0 26.66h60V40H0z" fill="#477050"/>
-              </svg>
-            </span>
-            <select id="language-select" name="language" aria-label="Select language" data-i18n-aria-label="languageLabel">
-              <option value="en">EN</option>
-              <option value="hu">HU</option>
-            </select>
-          </label>
-        </div>
-      </div>
-      <div class="nav-wrap page-wrap">
-        <a class="brand" href="#home" aria-label="Chili Joe's home" data-i18n-aria-label="brandHome">
-          <img class="brand-logo" src="logo.png" alt="" width="72" height="72" fetchpriority="high">
-        </a>
-        <nav class="main-nav" aria-label="Main navigation" data-i18n-aria-label="mainNav">
-          <a href="#menu" data-i18n="navMenu">The menu</a>
-          <a href="#story" data-i18n="navStory">Our place</a>
-          <a href="#visit" data-i18n="navVisit">Find us</a>
-        </nav>
-        <a class="nav-cta" href="#menu"><span data-i18n="navCta">Bring the heat</span> <span aria-hidden="true">↘</span></a>
-      </div>
-    </header>
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="gr-crust" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ff8b3d"/>
+          <stop offset=".55" stop-color="#e3461b"/>
+          <stop offset="1" stop-color="#a42711"/>
+        </linearGradient>
+        <radialGradient id="gr-bun" cx=".38" cy=".3" r=".8">
+          <stop offset="0" stop-color="#ffb064"/>
+          <stop offset=".55" stop-color="#ec7a2c"/>
+          <stop offset="1" stop-color="#b44a16"/>
+        </radialGradient>
+        <linearGradient id="gr-shake" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff"/>
+          <stop offset="1" stop-color="#e8eef8"/>
+        </linearGradient>
+        <pattern id="p-crumbs" width="14" height="14" patternUnits="userSpaceOnUse">
+          <circle cx="3" cy="4" r="1.9" fill="#ffb466" opacity=".85"/>
+          <circle cx="10" cy="9" r="2.3" fill="#8f200d" opacity=".5"/>
+          <circle cx="6.5" cy="12" r="1.4" fill="#ffd690" opacity=".7"/>
+          <circle cx="12" cy="2" r="1.3" fill="#7a1b0a" opacity=".55"/>
+        </pattern>
+        <pattern id="p-paper" width="74" height="36" patternUnits="userSpaceOnUse" patternTransform="rotate(-14)">
+          <rect width="74" height="36" fill="#fff"/>
+          <text x="3" y="14" fill="#2a62d6" font-family="Bangers, Impact, sans-serif" font-size="12" letter-spacing=".5">CHILI JOE'S</text>
+          <text x="40" y="31" fill="#f26118" font-family="Bangers, Impact, sans-serif" font-size="10">CHICKEN</text>
+        </pattern>
+        <filter id="f-crisp" x="-15%" y="-25%" width="130%" height="150%">
+          <feTurbulence type="fractalNoise" baseFrequency=".2" numOctaves="2" seed="4" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
 
-    <main>
+        <path id="tender-shape" d="M-58 6C-61-10-40-21-8-20C22-19 50-16 57-4C63 7 51 19 28 20C0 22-30 22-47 18C-54 16-57 12-58 6Z"/>
+        <g id="g-tender">
+          <use href="#tender-shape" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
+          <use href="#tender-shape" fill="url(#p-crumbs)" filter="url(#f-crisp)"/>
+          <path d="M-40-10C-15-15 20-14 42-6" fill="none" stroke="#ffb57d" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+        </g>
+        <g id="g-pickle">
+          <circle r="13" fill="#9dbb3c" stroke="#5f7d17" stroke-width="2.5" stroke-dasharray="3 2.2"/>
+          <circle r="9.5" fill="#c4dc6a"/>
+          <circle r="5" fill="none" stroke="#e8f4ad" stroke-width="1.2" stroke-dasharray="2 2"/>
+          <circle cx="-3" cy="2" r="1.1" fill="#7c9a26"/><circle cx="3" cy="-2" r="1.1" fill="#7c9a26"/><circle cx="2" cy="4" r="1" fill="#7c9a26"/>
+        </g>
+        <g id="g-fry">
+          <rect x="-4.5" y="-34" width="9" height="68" rx="2" fill="#f7b940" stroke="#c98219" stroke-width="1.4"/>
+          <path d="M-1.5-30V30" stroke="#ffdc7f" stroke-width="1.4"/>
+          <circle cx="1.5" cy="-18" r=".9" fill="#c4521c"/><circle cx="-1" cy="6" r=".9" fill="#c4521c"/>
+        </g>
+        <g id="g-sauce">
+          <path d="M-22-6-18 18H18L22-6Z" fill="#fff" stroke="#cfd5df" stroke-width="1.5"/>
+          <ellipse cy="-6" rx="22" ry="7" fill="#f6a184" stroke="#e7e9ee" stroke-width="2"/>
+          <ellipse cx="-6" cy="-8" rx="7" ry="2" fill="#ffd5c4"/>
+        </g>
+        <g id="g-basket">
+          <path d="M14 100Q120 80 228 100L208 152H34Z" fill="#262b36"/>
+          <path d="M24 98Q120 74 218 98L204 144H38Z" fill="url(#p-paper)"/>
+          <path d="M24 98 6 68 64 86ZM218 98 236 70 178 86Z" fill="url(#p-paper)" stroke="#d6dcea" stroke-width="1.2"/>
+        </g>
+        <g id="g-basket-front">
+          <path d="M28 124Q120 140 214 124L206 148H36Z" fill="url(#p-paper)" stroke="#d6dcea" stroke-width="1.2"/>
+          <path d="M30 140Q120 156 212 140L206 153H36Z" fill="#262b36"/>
+        </g>
+        <g id="g-fries-pile">
+          <use href="#g-fry" transform="translate(70 92) rotate(-38)"/>
+          <use href="#g-fry" transform="translate(88 80) rotate(-22)"/>
+          <use href="#g-fry" transform="translate(104 72) rotate(-8)"/>
+          <use href="#g-fry" transform="translate(120 70) rotate(4)"/>
+          <use href="#g-fry" transform="translate(136 74) rotate(16)"/>
+          <use href="#g-fry" transform="translate(152 80) rotate(30)"/>
+          <use href="#g-fry" transform="translate(170 92) rotate(44)"/>
+          <use href="#g-fry" transform="translate(96 94) rotate(-50)"/>
+          <use href="#g-fry" transform="translate(146 96) rotate(56)"/>
+          <use href="#g-fry" transform="translate(112 88) rotate(-20)"/>
+          <use href="#g-fry" transform="translate(130 90) rotate(24)"/>
+          <use href="#g-fry" transform="translate(80 104) rotate(-70)"/>
+          <use href="#g-fry" transform="translate(160 106) rotate(74)"/>
+          <use href="#g-fry" transform="translate(120 100) rotate(84)"/>
+        </g>
+        <g id="g-burger">
+          <path d="M58 118Q120 136 182 118L178 133Q120 147 62 133Z" fill="#e98a3e" stroke="#b5591f" stroke-width="2"/>
+          <use href="#tender-shape" transform="translate(120 109) scale(1.16 .78)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
+          <use href="#tender-shape" transform="translate(120 109) scale(1.16 .78)" fill="url(#p-crumbs)" filter="url(#f-crisp)"/>
+          <path d="M58 96q8-9 16 0t16 0 16 0 16 0 16 0 16 0 16 0 16 0 10 0L182 103Q120 112 58 103Z" fill="#f7f2e6" stroke="#ddd3bd" stroke-width="1.5"/>
+          <path d="M70 99h6M92 101h5M118 100h7M140 101h5M160 99h6" stroke="#9b4fb5" stroke-width="2" stroke-linecap="round"/>
+          <path d="M80 102h5M106 99h5M130 103h5M152 102h5" stroke="#f08a2c" stroke-width="2" stroke-linecap="round"/>
+          <use href="#g-pickle" transform="translate(98 94) scale(1 .55)"/>
+          <use href="#g-pickle" transform="translate(142 94) scale(1 .55)"/>
+          <path d="M56 92C56 52 88 32 120 32S184 52 184 92Q120 104 56 92Z" fill="url(#gr-bun)" stroke="#a8491a" stroke-width="2"/>
+          <ellipse cx="98" cy="52" rx="22" ry="8" fill="#fff" opacity=".38" transform="rotate(-18 98 52)"/>
+          <path d="M78 66Q98 52 116 54M126 52Q150 54 164 68M92 80Q120 70 150 80" fill="none" stroke="#b9561d" stroke-width="2" stroke-linecap="round" opacity=".35"/>
+        </g>
+        <g id="g-cup">
+          <path d="M-30-24-23 48H23L30-24Z" fill="url(#gr-shake)" stroke="#cbd3e1" stroke-width="1.5"/>
+          <text y="12" fill="#1d52c8" font-family="Bangers, Impact, sans-serif" font-size="11" text-anchor="middle">CHILI JOE'S</text>
+          <text y="23" fill="#f26118" font-family="Bangers, Impact, sans-serif" font-size="9" text-anchor="middle">CHICKEN</text>
+          <rect x="-32" y="-28" width="64" height="7" rx="3" fill="#e4e9f2" stroke="#cbd3e1"/>
+        </g>
+        <path id="cream" d="M-34-24C-37-40-20-48-10-43C-4-56 14-54 18-43C30-48 39-36 34-24Z" fill="#fff7ea" stroke="#e8d8bc" stroke-width="1.5"/>
+
+        <symbol id="food-tenders" viewBox="0 0 240 160">
+          <use href="#g-basket"/>
+          <use href="#g-fry" transform="translate(146 64) rotate(30)"/>
+          <use href="#g-fry" transform="translate(160 56) rotate(14)"/>
+          <use href="#g-fry" transform="translate(174 56) rotate(-4)"/>
+          <use href="#g-fry" transform="translate(188 62) rotate(-20)"/>
+          <use href="#g-fry" transform="translate(168 70) rotate(52)"/>
+          <use href="#g-fry" transform="translate(196 76) rotate(-44)"/>
+          <use href="#g-sauce" transform="translate(196 100)"/>
+          <use href="#g-tender" transform="translate(96 90) rotate(-14)"/>
+          <use href="#g-tender" transform="translate(116 110) rotate(-4)"/>
+          <use href="#g-tender" transform="translate(84 120) rotate(9) scale(.92)"/>
+          <use href="#g-pickle" transform="translate(94 84) scale(1 .8)"/>
+          <use href="#g-pickle" transform="translate(128 106) scale(1 .8)"/>
+          <use href="#g-basket-front"/>
+        </symbol>
+        <symbol id="food-burger" viewBox="0 0 240 160">
+          <use href="#g-basket"/>
+          <use href="#g-basket-front"/>
+          <use href="#g-burger"/>
+        </symbol>
+        <symbol id="food-burger-extra" viewBox="0 0 240 160">
+          <use href="#g-basket"/>
+          <use href="#g-fry" transform="translate(110 60) rotate(-12)"/>
+          <use href="#g-fry" transform="translate(124 58) rotate(6)"/>
+          <use href="#g-fry" transform="translate(136 62) rotate(22)"/>
+          <use href="#g-basket-front"/>
+          <use href="#g-burger" transform="translate(-28 30) scale(.82)"/>
+          <use href="#g-burger" transform="translate(70 30) scale(.82)"/>
+        </symbol>
+        <symbol id="food-fries" viewBox="0 0 240 160">
+          <use href="#g-basket"/>
+          <use href="#g-fries-pile"/>
+          <use href="#g-basket-front"/>
+        </symbol>
+        <symbol id="food-loaded" viewBox="0 0 240 160">
+          <use href="#g-basket"/>
+          <use href="#g-fries-pile"/>
+          <path d="M52 108C60 84 82 90 92 80 104 66 118 80 128 72 142 62 156 82 168 84 182 86 192 100 190 112Q120 128 52 108Z" fill="#ffc93a" stroke="#e7a11c" stroke-width="2"/>
+          <use href="#tender-shape" transform="translate(84 96) rotate(-20) scale(.28 .5)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
+          <use href="#tender-shape" transform="translate(112 86) rotate(12) scale(.3 .5)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
+          <use href="#tender-shape" transform="translate(144 92) rotate(-8) scale(.3 .5)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
+          <use href="#tender-shape" transform="translate(126 106) rotate(24) scale(.28 .48)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
+          <use href="#tender-shape" transform="translate(166 102) rotate(-30) scale(.26 .46)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
+          <path d="M66 100l10-7 10 7 10-7 10 7 10-7 10 7 10-7 10 7 10-7 10 7 10-7 10 7" fill="none" stroke="#e2301d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <g fill="none" stroke="#3d9d36" stroke-width="2.4">
+            <circle cx="96" cy="104" r="3"/><circle cx="122" cy="94" r="3"/><circle cx="150" cy="104" r="3"/><circle cx="104" cy="90" r="2.6"/><circle cx="138" cy="84" r="2.6"/><circle cx="174" cy="94" r="2.6"/><circle cx="76" cy="108" r="2.6"/>
+          </g>
+          <use href="#g-basket-front"/>
+        </symbol>
+        <symbol id="food-shakes" viewBox="0 0 240 160">
+          <g transform="translate(62 96) scale(.9)">
+            <use href="#g-cup"/>
+            <use href="#cream"/>
+            <path d="M-28-22C-26-10-22-14-21-4-20 4-16 2-16-8-15-18-8-14-6-20" fill="#3a2a24"/>
+            <circle cx="-14" cy="-40" r="8" fill="#2b2321" stroke="#4b3c37" stroke-width="2"/>
+            <circle cx="10" cy="-44" r="7" fill="#2b2321" stroke="#4b3c37" stroke-width="2"/>
+            <g fill="#2b2321"><circle cx="-22" cy="-30" r="2"/><circle cx="2" cy="-34" r="2.4"/><circle cx="20" cy="-30" r="1.8"/><circle cx="-4" cy="-28" r="1.5"/></g>
+          </g>
+          <g transform="translate(120 92)">
+            <use href="#g-cup"/>
+            <use href="#cream"/>
+            <path d="M-26-30C-18-40-10-26 0-36S16-28 26-34" fill="none" stroke="#d48728" stroke-width="3.2" stroke-linecap="round"/>
+            <g fill="#e7b46a" stroke="#c48a3a"><rect x="-16" y="-48" width="7" height="6" rx="1.5" transform="rotate(14 -12 -45)"/><rect x="2" y="-52" width="7" height="6" rx="1.5" transform="rotate(-18 5 -49)"/><rect x="14" y="-42" width="6" height="5" rx="1.5"/><rect x="-26" y="-36" width="6" height="5" rx="1.5"/></g>
+          </g>
+          <g transform="translate(178 96) scale(.9)">
+            <use href="#g-cup"/>
+            <use href="#cream"/>
+            <circle cx="-18" cy="-34" r="4" fill="#e23b2f"/><circle cx="-6" cy="-44" r="4" fill="#ffc72c"/><circle cx="8" cy="-40" r="4" fill="#1d6fe0"/><circle cx="20" cy="-32" r="4" fill="#3da447"/><circle cx="2" cy="-30" r="4" fill="#f26118"/><circle cx="-10" cy="-28" r="3.5" fill="#8a3fb8"/><circle cx="14" cy="-50" r="3.5" fill="#e23b2f"/>
+          </g>
+        </symbol>
+
+        <symbol id="i-pepper" viewBox="0 0 64 64">
+          <path d="M44 15C50 21 51 31 45 41 37 53 23 59 10 59 7 59 7 56 10 55 22 50 30 42 33 30 35 22 38 17 44 15Z" fill="var(--pepper, #d92325)" stroke="rgb(0 0 0 / 25%)" stroke-width="1.5"/>
+          <path d="M41 23C43 29 41 35 36 41" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+          <path d="M38 17C42 11 50 13 51 19 46 17 42 18 38 17Z" fill="var(--stem, #2f8f2f)"/>
+          <path d="M45 15C45 9 48 6 53 5" fill="none" stroke="var(--stem, #2f8f2f)" stroke-width="4" stroke-linecap="round"/>
+        </symbol>
+        <symbol id="i-flame" viewBox="0 0 64 64">
+          <path d="M32 4C36 16 48 22 48 38 48 52 40 60 32 60 22 60 14 52 14 40 14 30 20 24 22 18 26 24 26 28 30 30 30 20 28 12 32 4Z" fill="#ff7a1a"/>
+          <path d="M32 26C34 34 40 38 40 46 40 53 36 57 32 57 27 57 23 53 23 47 23 41 28 38 32 26Z" fill="#ffd23d"/>
+        </symbol>
+        <symbol id="i-crown" viewBox="0 0 80 56">
+          <path d="M9 47 5 12 24 31 39 5 53 29 75 10 70 47Q40 41 9 47Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 80 40">
+          <path d="M5 31C25 21 45 17 70 14M58 4 72 14 61 27" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="masthead">
+      <div class="masthead-decor" aria-hidden="true">
+        <img class="splat splat-logo" src="assets/splat-blue-1.svg" alt="">
+        <img class="splat splat-hero-left" src="assets/splat-orange-1.svg" alt="">
+        <img class="splat splat-hero-photo" src="assets/splat-blue-2.svg" alt="">
+        <img class="splat splat-hero-right" src="assets/splat-blue-1.svg" alt="">
+        <img class="splat splat-hero-small" src="assets/splat-orange-2.svg" alt="">
+        <img class="skyline skyline-hero" src="assets/skyline.svg" alt="">
+      </div>
+
+      <header class="site-header">
+        <div class="nav-wrap page-wrap">
+          <a class="brand" href="#home" aria-label="Chili Joe's home" data-i18n-aria-label="brandHome">
+            <img class="brand-logo" src="logo.png" alt="" width="112" height="112" fetchpriority="high">
+          </a>
+          <nav class="main-nav" aria-label="Main navigation" data-i18n-aria-label="mainNav">
+            <a href="#menu" data-i18n="navMenu">Menu</a>
+            <a href="#story" data-i18n="navStory">Our story</a>
+            <a href="#visit" data-i18n="navVisit">Locations</a>
+            <a href="#popular-items" data-i18n="navOrder">Order online</a>
+            <a href="#visit" data-i18n="navContact">Contact</a>
+          </nav>
+          <a class="nav-cta" href="#popular-items"><svg class="bag-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 8h15l-1 13h-13l-1-13Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><span data-i18n="navCta">Order now</span></a>
+          <div class="language-switch" role="group" aria-label="Select language" data-i18n-aria-label="languageLabel">
+            <button type="button" data-language="en" aria-pressed="true">EN</button>
+            <span aria-hidden="true">|</span>
+            <button type="button" data-language="hu" aria-pressed="false">HU</button>
+          </div>
+          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode" data-i18n-aria-label="themeToggle" data-i18n-title="themeToggle">
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+          </button>
+        </div>
+      </header>
+
       <section class="hero" id="home" aria-labelledby="hero-title">
         <div class="hero-grid page-wrap">
           <div class="hero-copy">
-            <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> <span data-i18n="heroEyebrow">A LITTLE NASHVILLE IN BUDAPEST</span></p>
-            <h1 id="hero-title" data-i18n-html="heroTitle">NASHVILLE<br>HEAT.<br><span>BUDAPEST</span><br>SOUL.</h1>
-            <p class="hero-description" data-i18n="heroDescription">Crispy hot chicken, your heat, and a whole lot of color. Welcome to Chili Joe's.</p>
-            <div class="hero-actions">
-              <a class="button button-orange" href="#menu"><span data-i18n="heroMenuCta">Explore the menu</span> <span aria-hidden="true">↓</span></a>
-              <a class="text-link" href="#story"><span data-i18n="heroStoryCta">Take a look around</span> <span aria-hidden="true">↗</span></a>
-            </div>
-            <div class="hero-note"><span class="note-spark" aria-hidden="true">✳</span><span data-i18n-html="heroNote">NO HEAT TO REAPER.<br><b>YOU CALL IT.</b></span></div>
+            <svg class="doodle hero-crown" aria-hidden="true"><use href="#i-crown"/></svg>
+            <h1 id="hero-title" data-i18n-html="heroTitle">NASHVILLE<br><span>CHICKEN</span></h1>
+            <p class="hero-tagline" data-i18n-html="heroDescription"><span>REAL CHICKEN.</span><span>REAL CRUNCH.</span><span>REAL NASHVILLE HEAT.</span></p>
+            <a class="button button-orange" href="#popular-items"><span data-i18n="heroMenuCta">Order now</span><span aria-hidden="true">→</span></a>
           </div>
-          <figure class="hero-visual">
-            <img src="Floor_1.jpg" alt="The Chili Joe's dining room, with orange booths and colorful Budapest street-art murals." data-i18n-alt="heroAlt" fetchpriority="high">
-            <figcaption class="photo-label"><span data-i18n="heroCaption">INSIDE CHILI JOE'S</span><span aria-hidden="true">BUDAPEST · HU</span></figcaption>
-            <div class="heat-stamp" aria-hidden="true"><span data-i18n-html="heatStamp">GOOD<br>MOOD.<br><b>HOT</b><br>FOOD.</span><i>✳</i></div>
-          </figure>
-        </div>
-        <div class="hero-scribble" aria-hidden="true" data-i18n="heroScribble">HOT! HOT! HOT!</div>
-      </section>
-
-      <div class="ticker" aria-label="Nashville chicken, Budapest energy" data-i18n-aria-label="tickerLabel">
-        <div class="ticker-track" aria-hidden="true">
-          <span data-i18n="tickerChicken">NASHVILLE CHICKEN</span><i>✳</i><span data-i18n="tickerBudapest">BUDAPEST ENERGY</span><i>✳</i><span data-i18n="tickerHeat">YOUR HEAT, YOUR WAY</span><i>✳</i><span data-i18n="tickerChicken">NASHVILLE CHICKEN</span><i>✳</i><span data-i18n="tickerBudapest">BUDAPEST ENERGY</span><i>✳</i><span data-i18n="tickerHeat">YOUR HEAT, YOUR WAY</span><i>✳</i>
-        </div>
-      </div>
-
-      <section class="menu-section section-pad" id="menu" aria-labelledby="menu-title">
-        <div class="page-wrap">
-          <div class="section-heading menu-heading">
-            <div>
-              <p class="eyebrow eyebrow-dark"><span class="eyebrow-dot" aria-hidden="true"></span> <span data-i18n="menuEyebrow">THE GOOD STUFF</span></p>
-              <h2 id="menu-title" data-i18n-html="menuTitle">PICK YOUR<br><span>PLEASURE.</span></h2>
-            </div>
-            <p class="heading-aside" data-i18n="menuIntro">From crispy chicken to loaded shakes, there's a favorite waiting for you. Start with a classic, then choose your heat.</p>
-          </div>
-
-          <figure class="menu-board-photo">
-            <img src="counter.jpg" alt="The Chili Joe's counter and overhead menu board, surrounded by colorful graffiti-style murals." data-i18n-alt="counterAlt" loading="lazy">
-            <figcaption><span data-i18n="counterCaption">THE COUNTER AT CHILI JOE'S</span> <span class="caption-spark" aria-hidden="true">✳</span> <span data-i18n="orderUp">ORDER UP</span></figcaption>
-          </figure>
-
-          <div class="menu-grid">
-            <article class="menu-card card-blue">
-              <span class="card-number" data-i18n="menuCardOneLabel">01 / CHICKEN</span>
-              <span class="menu-icon" aria-hidden="true">✳</span>
-              <h3 data-i18n-html="menuCardOneTitle">TENDERS<br>& MIXES</h3>
-              <p data-i18n="menuCardOneDescription">Golden, crunchy chicken with your choice of heat. Go solo or make it a mix.</p>
-              <span class="card-arrow" aria-hidden="true">↗</span>
-            </article>
-            <article class="menu-card card-orange">
-              <span class="card-number" data-i18n="menuCardTwoLabel">02 / BURGERS</span>
-              <span class="menu-icon" aria-hidden="true">★</span>
-              <h3 data-i18n-html="menuCardTwoTitle">JOE'S<br>BURGER</h3>
-              <p data-i18n="menuCardTwoDescription">A Nashville-style chicken burger. Add cheese, then set your spice level.</p>
-              <span class="card-arrow" aria-hidden="true">↗</span>
-            </article>
-            <article class="menu-card card-red">
-              <span class="card-number" data-i18n="menuCardThreeLabel">03 / SIDES</span>
-              <span class="menu-icon" aria-hidden="true">✳</span>
-              <h3 data-i18n-html="menuCardThreeTitle">THE<br>EXTRAS</h3>
-              <p data-i18n="menuCardThreeDescription">Fries, pickles, slaw, mac & cheese, and sauces made for dipping.</p>
-              <span class="card-arrow" aria-hidden="true">↗</span>
-            </article>
-            <article class="menu-card card-cream">
-              <span class="card-number" data-i18n="menuCardFourLabel">04 / SOMETHING SWEET</span>
-              <span class="menu-icon" aria-hidden="true">✷</span>
-              <h3 data-i18n-html="menuCardFourTitle">LOADED<br>SHAKES</h3>
-              <p data-i18n="menuCardFourDescription">Cool things down with a shake and your favorite sprinkle.</p>
-              <span class="card-arrow" aria-hidden="true">↗</span>
-            </article>
-          </div>
-
-          <div class="heat-panel">
-            <div class="heat-copy">
-              <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> <span data-i18n="heatEyebrow">THE HEAT CHECK</span></p>
-              <h3 data-i18n-html="heatTitle">HOW HOT<br>DO YOU <em>ROLL?</em></h3>
-            </div>
-            <ol class="heat-levels" aria-label="Available spice levels, from no heat to Reaper" data-i18n-aria-label="heatAria">
-              <li class="heat-none"><span class="heat-dot"></span><span data-i18n="heatNone">NO HEAT</span></li>
-              <li class="heat-mild"><span class="heat-dot"></span><span data-i18n="heatMild">MILD</span></li>
-              <li class="heat-hot"><span class="heat-dot"></span><span data-i18n="heatHot">HOT</span></li>
-              <li class="heat-extra"><span class="heat-dot"></span><span data-i18n="heatExtra">EXTRA HOT</span></li>
-              <li class="heat-reaper"><span class="heat-dot"></span><span>REAPER</span></li>
-            </ol>
+          <div class="hero-visual">
+            <p class="hero-style" aria-hidden="true" data-i18n-html="heroStyle">NASHVILLE<br>STYLE</p>
+            <figure class="hero-photo">
+              <img src="Floor_1.jpg" alt="The dining room at Chili Joe's, with Budapest murals and bright orange booths." data-i18n-alt="heroAlt" width="1200" height="900" fetchpriority="high">
+            </figure>
+            <p class="hero-list" aria-hidden="true" data-i18n-html="heroList">TENDERS<br>BURGERS<br>SIDES<br>SHAKES</p>
+            <svg class="doodle hero-list-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
           </div>
         </div>
       </section>
+    </div>
 
-      <section class="story-section" id="story" aria-labelledby="story-title">
-        <div class="story-grid page-wrap">
-          <figure class="story-photo">
-            <img src="parliment.jpg" alt="A hand-painted Budapest Parliament mural above the orange booth seating at Chili Joe's." data-i18n-alt="storyAlt" loading="lazy">
-            <span class="story-photo-sticker" aria-hidden="true" data-i18n-html="storySticker">BUDAPEST<br>LOVE <b>✳</b></span>
-          </figure>
-          <div class="story-copy">
-            <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> <span data-i18n="storyEyebrow">OUR KIND OF PLACE</span></p>
-            <h2 id="story-title" data-i18n-html="storyTitle">A BUDAPEST<br>BACKDROP.<br><span>A NASHVILLE<br>BITE.</span></h2>
-            <p data-i18n="storyDescription">Step inside for bold murals, bright colors, and the kind of hot chicken that lets you call the shots. Chili Joe's brings Nashville-style heat to a one-of-a-kind Budapest hangout.</p>
-            <a class="button button-outline" href="#visit"><span data-i18n="storyCta">Come on in</span> <span aria-hidden="true">↘</span></a>
-          </div>
+    <main>
+      <section class="feature-strip page-wrap" aria-label="What makes Chili Joe's special" data-i18n-aria-label="featuresLabel">
+        <article class="feature-item">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M9 31c4 4 8 4 10 2 2 12 10 21 21 21 11 0 17-9 15-20-1-6-4-10-6-16-1-6-6-9-11-7-4 2-5 7-3 11 2 4 0 8-4 8-6 0-10-8-14-10-4-2-9 4-8 11Z"/><path d="M38 11c-1-4 3-6 4-2 1-4 5-3 4 1"/><path d="m49 16 6 2-6 2"/><circle cx="43" cy="15" r="1" fill="currentColor"/><path d="M29 39c6 6 14 5 17-1M36 54v5m8-5v5"/></svg>
+          <div><h2 data-i18n="featureChicken">PREMIUM CHICKEN</h2><p data-i18n="featureChickenSub">Non-frozen. Always fresh.</p></div>
+        </article>
+        <article class="feature-item">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="m15 28 6 30h22l6-30H15Z"/><path d="M21 28V10l5-1v19m4 0V6l5 1v21m4 0V9l5 2v17"/><path d="m26 38 12 9m-12 0 12-9"/></svg>
+          <div><h2 data-i18n="featureFries">FRESH-CUT FRIES</h2><p data-i18n="featureFriesSub">Made in house.</p></div>
+        </article>
+        <article class="feature-item">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4c4 12 16 18 16 34 0 14-8 22-16 22-10 0-18-8-18-20 0-10 6-16 8-22 4 6 4 10 8 12 0-10-2-18 2-26Z"/><path d="M32 30c2 8 8 12 8 19 0 6-4 9-8 9-5 0-9-4-9-9 0-6 5-9 9-19Z"/></svg>
+          <div><h2 data-i18n="featureFlavors">NASHVILLE FLAVORS</h2><p data-i18n="featureFlavorsSub">From mild to game over.</p></div>
+        </article>
+        <article class="feature-item">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M17 9h30l12 14-27 34L5 23 17 9Z"/><path d="M5 23h54M23 23l9 34 9-34M17 9l6 14 9-14 9 14 6-14"/></svg>
+          <div><h2 data-i18n="featureIngredients">REAL INGREDIENTS</h2><p data-i18n="featureIngredientsSub">No shortcuts.</p></div>
+        </article>
+      </section>
+
+      <section class="category-section page-wrap" id="menu" aria-label="Explore the menu" data-i18n-aria-label="menuAria">
+        <div class="category-grid">
+          <a class="category-card" href="#popular-items">
+            <h2 data-i18n-html="categoryTenders">JOE'S <em>TENDERS</em></h2>
+            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-tenders"/></svg></span>
+            <span class="category-link"><span data-i18n="categoryViewTenders">VIEW TENDERS</span><b aria-hidden="true">→</b></span>
+          </a>
+          <a class="category-card" href="#popular-items">
+            <h2 data-i18n-html="categoryBurgers">JOE'S <em>BURGERS</em></h2>
+            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-burger"/></svg></span>
+            <span class="category-link"><span data-i18n="categoryViewBurgers">VIEW BURGERS</span><b aria-hidden="true">→</b></span>
+          </a>
+          <a class="category-card" href="#popular-items">
+            <h2 data-i18n-html="categorySides">SIDES</h2>
+            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-fries"/></svg></span>
+            <span class="category-link"><span data-i18n="categoryViewSides">VIEW SIDES</span><b aria-hidden="true">→</b></span>
+          </a>
+          <a class="category-card" href="#popular-items">
+            <h2 data-i18n-html="categoryShakes">LOADED <em>SHAKES</em></h2>
+            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-shakes"/></svg></span>
+            <span class="category-link"><span data-i18n="categoryViewShakes">VIEW SHAKES</span><b aria-hidden="true">→</b></span>
+          </a>
         </div>
       </section>
 
-      <section class="visit-section" id="visit" aria-labelledby="visit-title">
-        <div class="visit-inner page-wrap">
-          <div class="visit-mark" aria-hidden="true">✳</div>
-          <p class="eyebrow eyebrow-dark" data-i18n="visitEyebrow">YOUR NEXT BUDAPEST BITE</p>
-          <h2 id="visit-title" data-i18n-html="visitTitle">COME HUNGRY.<br><span>LEAVE HAPPY.</span></h2>
-          <p data-i18n-html="visitDescription">Find Chili Joe's in Budapest, Hungary.<br>Pick your heat. We'll bring the crunch.</p>
-          <a class="button button-navy" href="https://www.google.com/maps/search/?api=1&amp;query=Chili+Joe%27s+Budapest" target="_blank" rel="noopener noreferrer"><span data-i18n="visitCta">Find us on Maps</span> <span aria-hidden="true">↗</span></a>
+      <section class="heat-section page-wrap" aria-labelledby="heat-title">
+        <div class="heat-heading">
+          <svg class="doodle heat-crown" aria-hidden="true"><use href="#i-crown"/></svg>
+          <h2 id="heat-title" data-i18n-html="heatTitle">CHOOSE<br>YOUR <em>HEAT</em></h2>
+          <svg class="doodle heat-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
         </div>
-        <div class="visit-doodle visit-doodle-left" aria-hidden="true">HOT<br>STUFF</div>
-        <div class="visit-doodle visit-doodle-right" aria-hidden="true">JOE'S<br>✳</div>
+        <ol class="heat-levels" aria-label="Available spice levels, from no heat to Reaper" data-i18n-aria-label="heatAria">
+          <li class="heat-none"><span data-i18n="heatNone">NO HEAT</span><span class="peppers" aria-hidden="true"><svg><use href="#i-pepper"/></svg></span></li>
+          <li class="heat-mild"><span data-i18n="heatMild">MILD</span><span class="peppers" aria-hidden="true"><svg><use href="#i-pepper"/></svg></span></li>
+          <li class="heat-hot"><span data-i18n="heatHot">HOT</span><span class="peppers" aria-hidden="true"><svg><use href="#i-pepper"/></svg></span></li>
+          <li class="heat-extra"><span data-i18n="heatExtra">EXTRA HOT</span><span class="peppers" aria-hidden="true"><svg><use href="#i-pepper"/></svg><svg><use href="#i-pepper"/></svg></span></li>
+          <li class="heat-reaper"><span data-i18n="heatReaper">GAME OVER</span><span class="peppers" aria-hidden="true"><svg class="flame"><use href="#i-flame"/></svg><svg><use href="#i-pepper"/></svg></span><small data-i18n="heatReaperSub">BY CAROLINA REAPER</small></li>
+        </ol>
+      </section>
+
+      <section class="popular-section page-wrap" id="popular-items" aria-labelledby="popular-title">
+        <div class="section-heading">
+          <h2 id="popular-title"><span data-i18n="popularTitle">POPULAR ITEMS</span><svg class="doodle popular-crown" aria-hidden="true"><use href="#i-crown"/></svg></h2>
+          <a class="paint-link" href="#menu"><span data-i18n="popularCta">VIEW FULL MENU</span><b aria-hidden="true">→</b></a>
+        </div>
+        <div class="popular-grid">
+          <article class="popular-card">
+            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-tenders"/></svg></span>
+            <h3 data-i18n="popularTenders">JOE'S TENDERS</h3><p class="price">3490 <small>FT</small></p>
+          </article>
+          <article class="popular-card">
+            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-burger"/></svg></span>
+            <h3 data-i18n="popularBurger">JOE'S BURGER</h3><p class="price">3490 <small>FT</small></p>
+          </article>
+          <article class="popular-card">
+            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-burger-extra"/></svg></span>
+            <h3 data-i18n="popularExtra">JOE'S BURGER EXTRA</h3><p class="price">5590 <small>FT</small></p>
+          </article>
+          <article class="popular-card">
+            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-loaded"/></svg></span>
+            <h3 data-i18n="popularLoadedFries">LOADED FRIES</h3><p class="price">2790 <small>FT</small></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="visit-section" id="visit" aria-label="Visit Chili Joe's" data-i18n-aria-label="visitAria">
+        <div class="visit-decor" aria-hidden="true">
+          <img class="splat splat-visit-left" src="assets/splat-blue-2.svg" alt="">
+          <img class="splat splat-visit-right" src="assets/splat-blue-1.svg" alt="">
+          <img class="splat splat-visit-orange" src="assets/splat-orange-2.svg" alt="">
+          <img class="skyline skyline-visit-left" src="assets/skyline.svg" alt="">
+          <img class="skyline skyline-visit-right" src="assets/skyline.svg" alt="">
+        </div>
+        <div class="visit-grid page-wrap">
+          <div class="visit-copy" id="story">
+            <h2><span data-i18n="visitTitle">FIND US</span><svg class="doodle visit-crown" aria-hidden="true"><use href="#i-crown"/></svg></h2>
+            <p class="address"><svg class="pin-icon" viewBox="0 0 24 30" aria-hidden="true"><path d="M12 1C5.9 1 1 5.9 1 12c0 8.3 11 17 11 17s11-8.7 11-17C23 5.9 18.1 1 12 1Z"/><circle cx="12" cy="12" r="4"/></svg><span data-i18n-html="visitDescription">Budapest, V. kerület<br>Váci utca 61.</span></p>
+            <a class="button button-orange" href="https://www.google.com/maps/search/?api=1&amp;query=V%C3%A1ci+utca+61+Budapest" target="_blank" rel="noopener noreferrer"><span data-i18n="visitCta">GET DIRECTIONS</span><span aria-hidden="true">→</span></a>
+          </div>
+          <figure class="visit-photo">
+            <img src="counter.jpg" alt="The Chili Joe's counter, with the menu boards and the Váci Street 61 graffiti wall." data-i18n-alt="visitPhotoAlt" width="1200" height="904" loading="lazy">
+          </figure>
+          <div class="follow-panel">
+            <svg class="doodle follow-crown" aria-hidden="true"><use href="#i-crown"/></svg>
+            <h2 data-i18n="followTitle">FOLLOW US</h2>
+            <p class="follow-text" data-i18n="followDescription">For the latest drops, promos &amp; spicy content!</p>
+            <div class="social-icons" aria-label="Social media" data-i18n-aria-label="socialLabel">
+              <span class="social-tiktok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48Z"/></svg></span>
+              <span class="social-instagram" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="dot" cx="17.2" cy="6.8" r="1.1"/></svg></span>
+              <span class="social-facebook" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg></span>
+            </div>
+            <div class="phone" aria-hidden="true">
+              <div class="phone-screen">
+                <img src="parliment.jpg" alt="" loading="lazy">
+                <p data-i18n-html="heroTitle">NASHVILLE<br><span>CHICKEN</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="footer-main page-wrap">
-        <a class="brand footer-brand" href="#home" aria-label="Chili Joe's, back to top" data-i18n-aria-label="footerBrand">
-          <img class="brand-logo" src="logo.png" alt="" width="72" height="72" loading="lazy">
-        </a>
+        <span data-i18n="copyright">© CHILI JOE'S</span>
         <p data-i18n="footerTagline">NASHVILLE HEAT. BUDAPEST SOUL.</p>
         <a href="#home" class="back-top" data-i18n="backToTop">BACK TO TOP ↑</a>
       </div>
-      <div class="footer-bottom page-wrap"><span data-i18n="copyright">© CHILI JOE'S</span><span><span data-i18n="footerBottom">MADE FOR THE HEAT-LOVERS</span> <b>✳</b></span></div>
     </footer>
   </body>
 </html>
