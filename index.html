@@ -327,15 +327,25 @@
         <div class="heat-heading">
           <svg class="doodle heat-crown" aria-hidden="true"><use href="#i-crown"/></svg>
           <h2 id="heat-title" data-i18n-html="heatTitle">CHOOSE<br>YOUR <em>HEAT</em></h2>
-          <svg class="doodle heat-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <p class="heat-intro" data-i18n="heatIntro">Five levels, from no heat to Carolina Reaper.</p>
         </div>
-        <ol class="heat-levels" aria-label="Available spice levels, from no heat to Reaper" data-i18n-aria-label="heatAria">
-          <li class="heat-none"><span data-i18n="heatNone">NO HEAT</span><span class="peppers" aria-hidden="true"><svg><use href="#i-pepper"/></svg></span></li>
-          <li class="heat-mild"><span data-i18n="heatMild">MILD</span><span class="peppers" aria-hidden="true"><svg><use href="#i-pepper"/></svg></span></li>
-          <li class="heat-hot"><span data-i18n="heatHot">HOT</span><span class="peppers" aria-hidden="true"><svg><use href="#i-pepper"/></svg></span></li>
-          <li class="heat-extra"><span data-i18n="heatExtra">EXTRA HOT</span><span class="peppers" aria-hidden="true"><svg><use href="#i-pepper"/></svg><svg><use href="#i-pepper"/></svg></span></li>
-          <li class="heat-reaper"><span data-i18n="heatReaper">GAME OVER</span><span class="peppers" aria-hidden="true"><svg class="flame"><use href="#i-flame"/></svg><svg><use href="#i-pepper"/></svg></span><small data-i18n="heatReaperSub">BY CAROLINA REAPER</small></li>
-        </ol>
+        <div class="heat-guide">
+          <svg class="doodle heat-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <figure class="heat-photo">
+            <picture>
+              <source type="image/avif" srcset="assets/images/heat_levels-480.avif 480w, assets/images/heat_levels-800.avif 800w, assets/images/heat_levels-1086.avif 1086w" sizes="(max-width: 560px) calc(100vw - 30px), (max-width: 700px) min(calc(100vw - 40px), 420px), (max-width: 900px) min(44vw, 340px), (max-width: 1180px) 38vw, 450px">
+              <source type="image/webp" srcset="assets/images/heat_levels-480.webp 480w, assets/images/heat_levels-800.webp 800w, assets/images/heat_levels-1086.webp 1086w" sizes="(max-width: 560px) calc(100vw - 30px), (max-width: 700px) min(calc(100vw - 40px), 420px), (max-width: 900px) min(44vw, 340px), (max-width: 1180px) 38vw, 450px">
+              <img src="assets/images/heat_levels-800.jpg" srcset="assets/images/heat_levels-480.jpg 480w, assets/images/heat_levels-800.jpg 800w, assets/images/heat_levels-1086.jpg 1086w" sizes="(max-width: 560px) calc(100vw - 30px), (max-width: 700px) min(calc(100vw - 40px), 420px), (max-width: 900px) min(44vw, 340px), (max-width: 1180px) 38vw, 450px" alt="Five Nashville-style chicken tenders arranged from No Heat to Game Over, with fries and dip." data-i18n-alt="heatPhotoAlt" width="1086" height="1448" loading="lazy">
+            </picture>
+          </figure>
+          <ol class="heat-levels" role="list" aria-label="Available spice levels, from no heat to Reaper" data-i18n-aria-label="heatAria">
+            <li class="heat-none"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatNone">NO HEAT</span></span></li>
+            <li class="heat-mild"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatMild">MILD</span></span></li>
+            <li class="heat-hot"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatHot">HOT</span></span></li>
+            <li class="heat-extra"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatExtra">EXTRA HOT</span></span></li>
+            <li class="heat-reaper"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatReaper">GAME OVER</span><small data-i18n="heatReaperSub">BY CAROLINA REAPER</small></span></li>
+          </ol>
+        </div>
       </section>
 
       <section class="popular-section page-wrap" id="popular-items" aria-labelledby="popular-title">
