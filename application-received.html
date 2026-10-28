@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      (() => {
+        let theme = null;
+        try {
+          theme = localStorage.getItem("chili-joes-theme");
+        } catch {
+          // Fall back to the system preference when browser storage is unavailable.
+        }
+        if (theme !== "dark" && theme !== "light") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <title data-i18n="applicationConfirmationPageTitle">Application received — Chili Joe's</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script src="language.js" defer></script>
+    <script src="theme.js" defer></script>
+  </head>
+  <body class="standalone-body">
+    <header class="standalone-header page-wrap">
+      <a class="brand" href="index.html#home" aria-label="Chili Joe's home" data-i18n-aria-label="brandHome">
+        <img class="brand-logo" src="logo.png" alt="" width="112" height="112">
+      </a>
+      <div class="standalone-controls">
+        <div class="language-switch" role="group" aria-label="Select language" data-i18n-aria-label="languageLabel">
+          <button type="button" data-language="en" aria-pressed="true">EN</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" data-language="hu" aria-pressed="false">HU</button>
+        </div>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode" data-i18n-aria-label="themeToggle" data-i18n-title="themeToggle">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="standalone-main page-wrap">
+      <section class="standalone-card application-confirmation" aria-labelledby="confirmation-title">
+        <svg class="confirmation-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 33 25 46 52 17" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/></svg>
+        <h1 id="confirmation-title" data-i18n="applicationConfirmationTitle">APPLICATION RECEIVED!</h1>
+        <p data-i18n="applicationConfirmationText">Thanks for getting in touch. We’ve received your application and will review it as soon as we can.</p>
+        <a class="button button-orange" href="index.html#home"><span data-i18n="applicationConfirmationCta">Back to Chili Joe’s</span><span aria-hidden="true">→</span></a>
+      </section>
+    </main>
+  </body>
+</html>
