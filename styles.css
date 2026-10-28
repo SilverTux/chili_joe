@@ -61,7 +61,7 @@ html {
 
 body {
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   color: var(--ink);
   background: var(--paper);
   font-family: var(--body);
@@ -70,7 +70,7 @@ body {
 
 img { display: block; max-width: 100%; }
 a { color: inherit; }
-a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
 
 .page-wrap { width: min(1320px, calc(100% - 64px)); margin-inline: auto; }
 
@@ -675,13 +675,60 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
 
 .phone-screen p span { color: var(--orange); text-shadow: 2px 2px 0 #fff; }
 
+/* Careers + application form */
+
+.careers-section { padding-block: clamp(42px, 6vw, 86px); background: var(--blue-light); }
+.careers-layout { display: grid; grid-template-columns: minmax(230px, .8fr) minmax(0, 1.2fr); align-items: start; gap: clamp(28px, 6vw, 88px); }
+.careers-copy { padding-top: 18px; }
+.careers-kicker { margin: 0 0 10px; color: var(--orange-dark); font-family: var(--display); font-size: 20px; letter-spacing: .08em; }
+.careers-copy h1,
+.careers-copy h2 { margin: 0; color: var(--blue-dark); font-family: var(--display); font-size: clamp(44px, 5.3vw, 74px); line-height: .95; text-shadow: 3px 4px 0 rgb(13 42 125 / 13%); transform: rotate(-3deg); transform-origin: left center; }
+.careers-copy > p:last-child { max-width: 430px; margin: 26px 0 0; color: var(--ink); font-size: 18px; line-height: 1.55; }
+
+.application-form { min-width: 0; padding: clamp(22px, 3vw, 38px); border: 4px solid #fff; border-radius: 20px; color: var(--ink); background: #fff; box-shadow: 0 14px 30px rgb(15 45 88 / 18%); color-scheme: light; }
+.application-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 18px; }
+.application-field { min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+.application-field-full { grid-column: 1 / -1; }
+.application-field label { color: var(--blue-dark); font-family: var(--display); font-size: 19px; letter-spacing: .025em; }
+.application-field input,
+.application-field select,
+.application-field textarea { width: 100%; min-height: 48px; padding: 10px 12px; border: 2px solid #b8c7e7; border-radius: 8px; color: var(--ink); background: #fff; font: 16px/1.4 var(--body); }
+.application-field textarea { min-height: 96px; resize: vertical; }
+.application-field input[type="file"] { min-height: 0; padding: 9px; font-size: 14px; }
+.field-help { margin: 0; color: #4e5870; font-size: 14px; line-height: 1.4; }
+.application-privacy { margin: 22px 0 18px; color: var(--ink); font-size: 14px; line-height: 1.5; }
+.application-privacy a { color: var(--blue-dark); font-weight: 700; text-underline-offset: 3px; }
+.application-privacy a:hover { color: var(--orange-dark); }
+.application-submit { cursor: pointer; }
+
+/* Standalone confirmation and applicant privacy pages */
+
+.standalone-body { min-height: 100vh; }
+.standalone-header { min-height: 100px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.standalone-header .brand-logo { width: 86px; height: 86px; }
+.standalone-controls { display: flex; align-items: center; gap: 14px; }
+.standalone-main { max-width: 900px; padding-block: clamp(24px, 5vw, 64px) clamp(48px, 8vw, 100px); }
+.standalone-card { padding: clamp(24px, 5vw, 58px); border: 4px solid #fff; border-radius: 20px; color: var(--ink); background: #fff; box-shadow: 0 14px 34px rgb(15 45 88 / 18%); }
+.application-confirmation { text-align: center; }
+.confirmation-mark { width: 72px; height: 72px; margin: 0 auto 18px; padding: 15px; border-radius: 50%; color: #fff; background: #24834b; }
+.application-confirmation h1,
+.privacy-content h1 { margin: 0; color: var(--blue-dark); font-family: var(--display); font-size: clamp(36px, 6vw, 60px); line-height: 1; }
+.application-confirmation > p { max-width: 600px; margin: 18px auto 26px; font-size: 18px; line-height: 1.55; }
+.privacy-content h1 { margin-bottom: 22px; }
+.privacy-content section { margin-top: 24px; }
+.privacy-content h2 { margin: 0 0 8px; color: var(--blue-dark); font-family: var(--display); font-size: 24px; letter-spacing: .02em; }
+.privacy-content p { margin: 0; font-size: 16px; line-height: 1.55; }
+.privacy-content .privacy-draft-warning { padding: 16px 18px; border-left: 5px solid #d99400; border-radius: 6px; color: #352600; background: #fff1c7; font-weight: 700; }
+.privacy-content > .button { margin-top: 30px; }
+
 /* Footer */
 
 .site-footer { color: #e4edfb; background: var(--blue-dark); }
 .footer-main { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; font-family: var(--display); font-size: 17px; letter-spacing: .06em; }
 .footer-main > p { margin: 0; }
-.back-top { text-decoration: none; }
+.back-top, .footer-careers { text-decoration: none; }
 .back-top:hover { color: #ffc857; }
+.footer-careers:hover { color: #ffc857; }
 
 /* Responsive */
 
@@ -728,6 +775,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
   .visit-grid { grid-template-columns: 1fr; }
   .visit-copy { padding-bottom: 6px; }
   .follow-panel { grid-column: auto; }
+  .careers-layout { grid-template-columns: 1fr; gap: 24px; }
+  .careers-copy { max-width: 620px; padding-top: 0; }
 }
 
 @media (max-width: 700px) {
@@ -790,6 +839,16 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
   .follow-panel .phone { top: 18px; right: 4px; width: 112px; }
   .social-icons { gap: 10px; }
   .social-icons > span, .social-icons > a { width: 44px; height: 44px; }
+  .application-fields { grid-template-columns: 1fr; gap: 16px; }
+  .application-field-full { grid-column: auto; }
+  .application-form { padding: 20px 16px; border-width: 3px; border-radius: 15px; }
+  .application-field label { font-size: 18px; }
+  .standalone-header { min-height: 80px; }
+  .standalone-header .brand-logo { width: 68px; height: 68px; }
+  .standalone-controls { gap: 8px; }
+  .standalone-main { padding-top: 24px; }
+  .standalone-card { padding: 24px 18px; border-width: 3px; border-radius: 15px; }
+  .privacy-content h2 { font-size: 21px; }
   .footer-main { min-height: 0; padding-block: 16px; flex-wrap: wrap; justify-content: center; font-size: 14px; text-align: center; }
 }
 
@@ -907,6 +966,28 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
     radial-gradient(ellipse at 85% 40%, #173fa8, transparent 45%),
     var(--navy);
 }
+
+[data-theme="dark"] .careers-section {
+  background:
+    radial-gradient(ellipse at 15% 50%, #1a46b4, transparent 45%),
+    radial-gradient(ellipse at 85% 40%, #173fa8, transparent 45%),
+    var(--navy);
+}
+
+[data-theme="dark"] .careers-kicker { color: #ffc857; }
+[data-theme="dark"] .careers-copy h1,
+[data-theme="dark"] .careers-copy h2 { color: #fff; text-shadow: var(--outline-shadow-sm); }
+[data-theme="dark"] .careers-copy > p:last-child { color: #fff; text-shadow: 0 2px 4px rgb(0 0 0 / 35%); }
+[data-theme="dark"] .application-form,
+[data-theme="dark"] .standalone-card { border-color: #13307f; color: var(--ink); background: #fff; box-shadow: 0 16px 34px rgb(0 0 0 / 40%); }
+[data-theme="dark"] .application-field label,
+[data-theme="dark"] .application-privacy a,
+[data-theme="dark"] .privacy-content h2,
+[data-theme="dark"] .application-confirmation h1,
+[data-theme="dark"] .privacy-content h1 { color: var(--blue-dark); }
+[data-theme="dark"] .application-privacy { color: var(--ink); }
+[data-theme="dark"] .field-help { color: #4e5870; }
+[data-theme="dark"] .privacy-content .privacy-draft-warning { color: #352600; background: #fff1c7; }
 
 [data-theme="dark"] .splat-visit-left,
 [data-theme="dark"] .splat-visit-right { opacity: .75; }
