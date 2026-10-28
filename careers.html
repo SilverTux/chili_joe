@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Apply to join the Chili Joe's team in Budapest." data-i18n-meta="careersMetaDescription">
+    <script>
+      (() => {
+        let theme = null;
+        try {
+          theme = localStorage.getItem("chili-joes-theme");
+        } catch {
+          // Fall back to the system preference when browser storage is unavailable.
+        }
+        if (theme !== "dark" && theme !== "light") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <title data-i18n="careersPageTitle">Careers — Chili Joe's</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script src="language.js" defer></script>
+    <script src="theme.js" defer></script>
+  </head>
+  <body class="standalone-body" id="top">
+    <header class="standalone-header page-wrap">
+      <a class="brand" href="index.html#home" aria-label="Chili Joe's home" data-i18n-aria-label="brandHome">
+        <img class="brand-logo" src="logo.png" alt="" width="112" height="112">
+      </a>
+      <div class="standalone-controls">
+        <div class="language-switch" role="group" aria-label="Select language" data-i18n-aria-label="languageLabel">
+          <button type="button" data-language="en" aria-pressed="true">EN</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" data-language="hu" aria-pressed="false">HU</button>
+        </div>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode" data-i18n-aria-label="themeToggle" data-i18n-title="themeToggle">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="careers-section careers-page-section" id="careers" aria-labelledby="careers-title">
+        <div class="careers-layout page-wrap">
+          <div class="careers-copy">
+            <p class="careers-kicker" data-i18n="careersKicker">NOW HIRING</p>
+            <h1 id="careers-title" data-i18n="careersTitle">JOIN THE CREW</h1>
+            <p data-i18n="careersDescription">Love good food and a fast-moving team? Tell us a little about yourself and what kind of role you’re looking for.</p>
+          </div>
+
+          <form class="application-form" name="job-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="./application-received.html" aria-label="Job application form" data-i18n-aria-label="applicationFormLabel">
+            <input type="hidden" name="form-name" value="job-application">
+            <div class="form-honeypot" hidden aria-hidden="true">
+              <label>Leave this field empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+            </div>
+
+            <div class="application-fields">
+              <div class="application-field">
+                <label for="application-name" data-i18n="applicationName">Full name</label>
+                <input id="application-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="application-field">
+                <label for="application-email" data-i18n="applicationEmail">Email address</label>
+                <input id="application-email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="application-field">
+                <label for="application-phone" data-i18n="applicationPhone">Phone (optional)</label>
+                <input id="application-phone" name="phone" type="tel" autocomplete="tel">
+              </div>
+              <div class="application-field application-field-full">
+                <label for="application-availability" data-i18n="applicationAvailability">Availability and earliest start date</label>
+                <textarea id="application-availability" name="availability" rows="3"></textarea>
+              </div>
+              <div class="application-field application-field-full">
+                <label for="application-experience" data-i18n="applicationExperience">A little about you and your experience</label>
+                <textarea id="application-experience" name="experience" rows="5"></textarea>
+              </div>
+              <div class="application-field application-field-full">
+                <label for="application-cv" data-i18n="applicationCv">CV (optional, PDF only)</label>
+                <input id="application-cv" name="cv" type="file" accept=".pdf,application/pdf" aria-describedby="application-cv-help">
+                <p class="field-help" id="application-cv-help" data-i18n="applicationCvHelp">You can apply without attaching a CV.</p>
+              </div>
+            </div>
+
+            <p class="application-privacy"><span data-i18n="applicationPrivacyLead">Before applying, please read our</span> <a href="applicant-privacy.html" data-i18n="applicationPrivacyLink">applicant privacy notice</a>.</p>
+            <button class="button button-orange application-submit" type="submit"><span data-i18n="applicationSubmit">Send application</span><span aria-hidden="true">→</span></button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main page-wrap">
+        <span data-i18n="copyright">© CHILI JOE'S</span>
+        <p data-i18n="footerTagline">NASHVILLE HEAT. BUDAPEST SOUL.</p>
+        <a class="footer-careers" href="careers.html#careers" data-i18n="navCareers">Careers</a>
+        <a class="back-top" href="#top" data-i18n="backToTop">BACK TO TOP ↑</a>
+      </div>
+    </footer>
+  </body>
+</html>
