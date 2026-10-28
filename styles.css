@@ -630,7 +630,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
 .follow-text { max-width: 260px; margin: 16px 0 22px 10px; color: var(--blue-dark); font-family: var(--display); font-size: clamp(17px, 1.6vw, 21px); letter-spacing: .03em; line-height: 1.05; text-transform: uppercase; transform: rotate(-5deg); }
 
 .social-icons { display: flex; align-items: center; gap: 14px; }
-.social-icons span { width: 52px; height: 52px; display: grid; place-items: center; border: 3px solid #fff; border-radius: 50%; color: #fff; box-shadow: 0 4px 10px rgb(0 0 0 / 18%); }
+.social-icons > span, .social-icons > a { width: 52px; height: 52px; display: grid; place-items: center; border: 3px solid #fff; border-radius: 50%; color: #fff; box-shadow: 0 4px 10px rgb(0 0 0 / 18%); }
 .social-icons svg { width: 26px; height: 26px; fill: currentColor; }
 .social-tiktok { background: #101010; }
 .social-tiktok svg { filter: drop-shadow(-1.5px -1px 0 #25f4ee) drop-shadow(1.5px 1px 0 #fe2c55); }
@@ -789,7 +789,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
   .follow-panel { min-height: 0; padding-right: 130px; }
   .follow-panel .phone { top: 18px; right: 4px; width: 112px; }
   .social-icons { gap: 10px; }
-  .social-icons span { width: 44px; height: 44px; }
+  .social-icons > span, .social-icons > a { width: 44px; height: 44px; }
   .footer-main { min-height: 0; padding-block: 16px; flex-wrap: wrap; justify-content: center; font-size: 14px; text-align: center; }
 }
 
