@@ -30,176 +30,6 @@
   <body>
     <svg class="sprite" aria-hidden="true" focusable="false">
       <defs>
-        <linearGradient id="gr-crust" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#ff8b3d"/>
-          <stop offset=".55" stop-color="#e3461b"/>
-          <stop offset="1" stop-color="#a42711"/>
-        </linearGradient>
-        <radialGradient id="gr-bun" cx=".38" cy=".3" r=".8">
-          <stop offset="0" stop-color="#ffb064"/>
-          <stop offset=".55" stop-color="#ec7a2c"/>
-          <stop offset="1" stop-color="#b44a16"/>
-        </radialGradient>
-        <linearGradient id="gr-shake" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#fff"/>
-          <stop offset="1" stop-color="#e8eef8"/>
-        </linearGradient>
-        <pattern id="p-crumbs" width="14" height="14" patternUnits="userSpaceOnUse">
-          <circle cx="3" cy="4" r="1.9" fill="#ffb466" opacity=".85"/>
-          <circle cx="10" cy="9" r="2.3" fill="#8f200d" opacity=".5"/>
-          <circle cx="6.5" cy="12" r="1.4" fill="#ffd690" opacity=".7"/>
-          <circle cx="12" cy="2" r="1.3" fill="#7a1b0a" opacity=".55"/>
-        </pattern>
-        <pattern id="p-paper" width="74" height="36" patternUnits="userSpaceOnUse" patternTransform="rotate(-14)">
-          <rect width="74" height="36" fill="#fff"/>
-          <text x="3" y="14" fill="#2a62d6" font-family="Bangers, Impact, sans-serif" font-size="12" letter-spacing=".5">CHILI JOE'S</text>
-          <text x="40" y="31" fill="#f26118" font-family="Bangers, Impact, sans-serif" font-size="10">CHICKEN</text>
-        </pattern>
-        <filter id="f-crisp" x="-15%" y="-25%" width="130%" height="150%">
-          <feTurbulence type="fractalNoise" baseFrequency=".2" numOctaves="2" seed="4" result="noise"/>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
-        </filter>
-
-        <path id="tender-shape" d="M-58 6C-61-10-40-21-8-20C22-19 50-16 57-4C63 7 51 19 28 20C0 22-30 22-47 18C-54 16-57 12-58 6Z"/>
-        <g id="g-tender">
-          <use href="#tender-shape" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
-          <use href="#tender-shape" fill="url(#p-crumbs)" filter="url(#f-crisp)"/>
-          <path d="M-40-10C-15-15 20-14 42-6" fill="none" stroke="#ffb57d" stroke-width="3" stroke-linecap="round" opacity=".55"/>
-        </g>
-        <g id="g-pickle">
-          <circle r="13" fill="#9dbb3c" stroke="#5f7d17" stroke-width="2.5" stroke-dasharray="3 2.2"/>
-          <circle r="9.5" fill="#c4dc6a"/>
-          <circle r="5" fill="none" stroke="#e8f4ad" stroke-width="1.2" stroke-dasharray="2 2"/>
-          <circle cx="-3" cy="2" r="1.1" fill="#7c9a26"/><circle cx="3" cy="-2" r="1.1" fill="#7c9a26"/><circle cx="2" cy="4" r="1" fill="#7c9a26"/>
-        </g>
-        <g id="g-fry">
-          <rect x="-4.5" y="-34" width="9" height="68" rx="2" fill="#f7b940" stroke="#c98219" stroke-width="1.4"/>
-          <path d="M-1.5-30V30" stroke="#ffdc7f" stroke-width="1.4"/>
-          <circle cx="1.5" cy="-18" r=".9" fill="#c4521c"/><circle cx="-1" cy="6" r=".9" fill="#c4521c"/>
-        </g>
-        <g id="g-sauce">
-          <path d="M-22-6-18 18H18L22-6Z" fill="#fff" stroke="#cfd5df" stroke-width="1.5"/>
-          <ellipse cy="-6" rx="22" ry="7" fill="#f6a184" stroke="#e7e9ee" stroke-width="2"/>
-          <ellipse cx="-6" cy="-8" rx="7" ry="2" fill="#ffd5c4"/>
-        </g>
-        <g id="g-basket">
-          <path d="M14 100Q120 80 228 100L208 152H34Z" fill="#262b36"/>
-          <path d="M24 98Q120 74 218 98L204 144H38Z" fill="url(#p-paper)"/>
-          <path d="M24 98 6 68 64 86ZM218 98 236 70 178 86Z" fill="url(#p-paper)" stroke="#d6dcea" stroke-width="1.2"/>
-        </g>
-        <g id="g-basket-front">
-          <path d="M28 124Q120 140 214 124L206 148H36Z" fill="url(#p-paper)" stroke="#d6dcea" stroke-width="1.2"/>
-          <path d="M30 140Q120 156 212 140L206 153H36Z" fill="#262b36"/>
-        </g>
-        <g id="g-fries-pile">
-          <use href="#g-fry" transform="translate(70 92) rotate(-38)"/>
-          <use href="#g-fry" transform="translate(88 80) rotate(-22)"/>
-          <use href="#g-fry" transform="translate(104 72) rotate(-8)"/>
-          <use href="#g-fry" transform="translate(120 70) rotate(4)"/>
-          <use href="#g-fry" transform="translate(136 74) rotate(16)"/>
-          <use href="#g-fry" transform="translate(152 80) rotate(30)"/>
-          <use href="#g-fry" transform="translate(170 92) rotate(44)"/>
-          <use href="#g-fry" transform="translate(96 94) rotate(-50)"/>
-          <use href="#g-fry" transform="translate(146 96) rotate(56)"/>
-          <use href="#g-fry" transform="translate(112 88) rotate(-20)"/>
-          <use href="#g-fry" transform="translate(130 90) rotate(24)"/>
-          <use href="#g-fry" transform="translate(80 104) rotate(-70)"/>
-          <use href="#g-fry" transform="translate(160 106) rotate(74)"/>
-          <use href="#g-fry" transform="translate(120 100) rotate(84)"/>
-        </g>
-        <g id="g-burger">
-          <path d="M58 118Q120 136 182 118L178 133Q120 147 62 133Z" fill="#e98a3e" stroke="#b5591f" stroke-width="2"/>
-          <use href="#tender-shape" transform="translate(120 109) scale(1.16 .78)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
-          <use href="#tender-shape" transform="translate(120 109) scale(1.16 .78)" fill="url(#p-crumbs)" filter="url(#f-crisp)"/>
-          <path d="M58 96q8-9 16 0t16 0 16 0 16 0 16 0 16 0 16 0 16 0 10 0L182 103Q120 112 58 103Z" fill="#f7f2e6" stroke="#ddd3bd" stroke-width="1.5"/>
-          <path d="M70 99h6M92 101h5M118 100h7M140 101h5M160 99h6" stroke="#9b4fb5" stroke-width="2" stroke-linecap="round"/>
-          <path d="M80 102h5M106 99h5M130 103h5M152 102h5" stroke="#f08a2c" stroke-width="2" stroke-linecap="round"/>
-          <use href="#g-pickle" transform="translate(98 94) scale(1 .55)"/>
-          <use href="#g-pickle" transform="translate(142 94) scale(1 .55)"/>
-          <path d="M56 92C56 52 88 32 120 32S184 52 184 92Q120 104 56 92Z" fill="url(#gr-bun)" stroke="#a8491a" stroke-width="2"/>
-          <ellipse cx="98" cy="52" rx="22" ry="8" fill="#fff" opacity=".38" transform="rotate(-18 98 52)"/>
-          <path d="M78 66Q98 52 116 54M126 52Q150 54 164 68M92 80Q120 70 150 80" fill="none" stroke="#b9561d" stroke-width="2" stroke-linecap="round" opacity=".35"/>
-        </g>
-        <g id="g-cup">
-          <path d="M-30-24-23 48H23L30-24Z" fill="url(#gr-shake)" stroke="#cbd3e1" stroke-width="1.5"/>
-          <text y="12" fill="#1d52c8" font-family="Bangers, Impact, sans-serif" font-size="11" text-anchor="middle">CHILI JOE'S</text>
-          <text y="23" fill="#f26118" font-family="Bangers, Impact, sans-serif" font-size="9" text-anchor="middle">CHICKEN</text>
-          <rect x="-32" y="-28" width="64" height="7" rx="3" fill="#e4e9f2" stroke="#cbd3e1"/>
-        </g>
-        <path id="cream" d="M-34-24C-37-40-20-48-10-43C-4-56 14-54 18-43C30-48 39-36 34-24Z" fill="#fff7ea" stroke="#e8d8bc" stroke-width="1.5"/>
-
-        <symbol id="food-tenders" viewBox="0 0 240 160">
-          <use href="#g-basket"/>
-          <use href="#g-fry" transform="translate(146 64) rotate(30)"/>
-          <use href="#g-fry" transform="translate(160 56) rotate(14)"/>
-          <use href="#g-fry" transform="translate(174 56) rotate(-4)"/>
-          <use href="#g-fry" transform="translate(188 62) rotate(-20)"/>
-          <use href="#g-fry" transform="translate(168 70) rotate(52)"/>
-          <use href="#g-fry" transform="translate(196 76) rotate(-44)"/>
-          <use href="#g-sauce" transform="translate(196 100)"/>
-          <use href="#g-tender" transform="translate(96 90) rotate(-14)"/>
-          <use href="#g-tender" transform="translate(116 110) rotate(-4)"/>
-          <use href="#g-tender" transform="translate(84 120) rotate(9) scale(.92)"/>
-          <use href="#g-pickle" transform="translate(94 84) scale(1 .8)"/>
-          <use href="#g-pickle" transform="translate(128 106) scale(1 .8)"/>
-          <use href="#g-basket-front"/>
-        </symbol>
-        <symbol id="food-burger" viewBox="0 0 240 160">
-          <use href="#g-basket"/>
-          <use href="#g-basket-front"/>
-          <use href="#g-burger"/>
-        </symbol>
-        <symbol id="food-burger-extra" viewBox="0 0 240 160">
-          <use href="#g-basket"/>
-          <use href="#g-fry" transform="translate(110 60) rotate(-12)"/>
-          <use href="#g-fry" transform="translate(124 58) rotate(6)"/>
-          <use href="#g-fry" transform="translate(136 62) rotate(22)"/>
-          <use href="#g-basket-front"/>
-          <use href="#g-burger" transform="translate(-28 30) scale(.82)"/>
-          <use href="#g-burger" transform="translate(70 30) scale(.82)"/>
-        </symbol>
-        <symbol id="food-fries" viewBox="0 0 240 160">
-          <use href="#g-basket"/>
-          <use href="#g-fries-pile"/>
-          <use href="#g-basket-front"/>
-        </symbol>
-        <symbol id="food-loaded" viewBox="0 0 240 160">
-          <use href="#g-basket"/>
-          <use href="#g-fries-pile"/>
-          <path d="M52 108C60 84 82 90 92 80 104 66 118 80 128 72 142 62 156 82 168 84 182 86 192 100 190 112Q120 128 52 108Z" fill="#ffc93a" stroke="#e7a11c" stroke-width="2"/>
-          <use href="#tender-shape" transform="translate(84 96) rotate(-20) scale(.28 .5)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
-          <use href="#tender-shape" transform="translate(112 86) rotate(12) scale(.3 .5)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
-          <use href="#tender-shape" transform="translate(144 92) rotate(-8) scale(.3 .5)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
-          <use href="#tender-shape" transform="translate(126 106) rotate(24) scale(.28 .48)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
-          <use href="#tender-shape" transform="translate(166 102) rotate(-30) scale(.26 .46)" fill="url(#gr-crust)" filter="url(#f-crisp)"/>
-          <path d="M66 100l10-7 10 7 10-7 10 7 10-7 10 7 10-7 10 7 10-7 10 7 10-7 10 7" fill="none" stroke="#e2301d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <g fill="none" stroke="#3d9d36" stroke-width="2.4">
-            <circle cx="96" cy="104" r="3"/><circle cx="122" cy="94" r="3"/><circle cx="150" cy="104" r="3"/><circle cx="104" cy="90" r="2.6"/><circle cx="138" cy="84" r="2.6"/><circle cx="174" cy="94" r="2.6"/><circle cx="76" cy="108" r="2.6"/>
-          </g>
-          <use href="#g-basket-front"/>
-        </symbol>
-        <symbol id="food-shakes" viewBox="0 0 240 160">
-          <g transform="translate(62 96) scale(.9)">
-            <use href="#g-cup"/>
-            <use href="#cream"/>
-            <path d="M-28-22C-26-10-22-14-21-4-20 4-16 2-16-8-15-18-8-14-6-20" fill="#3a2a24"/>
-            <circle cx="-14" cy="-40" r="8" fill="#2b2321" stroke="#4b3c37" stroke-width="2"/>
-            <circle cx="10" cy="-44" r="7" fill="#2b2321" stroke="#4b3c37" stroke-width="2"/>
-            <g fill="#2b2321"><circle cx="-22" cy="-30" r="2"/><circle cx="2" cy="-34" r="2.4"/><circle cx="20" cy="-30" r="1.8"/><circle cx="-4" cy="-28" r="1.5"/></g>
-          </g>
-          <g transform="translate(120 92)">
-            <use href="#g-cup"/>
-            <use href="#cream"/>
-            <path d="M-26-30C-18-40-10-26 0-36S16-28 26-34" fill="none" stroke="#d48728" stroke-width="3.2" stroke-linecap="round"/>
-            <g fill="#e7b46a" stroke="#c48a3a"><rect x="-16" y="-48" width="7" height="6" rx="1.5" transform="rotate(14 -12 -45)"/><rect x="2" y="-52" width="7" height="6" rx="1.5" transform="rotate(-18 5 -49)"/><rect x="14" y="-42" width="6" height="5" rx="1.5"/><rect x="-26" y="-36" width="6" height="5" rx="1.5"/></g>
-          </g>
-          <g transform="translate(178 96) scale(.9)">
-            <use href="#g-cup"/>
-            <use href="#cream"/>
-            <circle cx="-18" cy="-34" r="4" fill="#e23b2f"/><circle cx="-6" cy="-44" r="4" fill="#ffc72c"/><circle cx="8" cy="-40" r="4" fill="#1d6fe0"/><circle cx="20" cy="-32" r="4" fill="#3da447"/><circle cx="2" cy="-30" r="4" fill="#f26118"/><circle cx="-10" cy="-28" r="3.5" fill="#8a3fb8"/><circle cx="14" cy="-50" r="3.5" fill="#e23b2f"/>
-          </g>
-        </symbol>
-
         <symbol id="i-pepper" viewBox="0 0 64 64">
           <path d="M44 15C50 21 51 31 45 41 37 53 23 59 10 59 7 59 7 56 10 55 22 50 30 42 33 30 35 22 38 17 44 15Z" fill="var(--pepper, #d92325)" stroke="rgb(0 0 0 / 25%)" stroke-width="1.5"/>
           <path d="M41 23C43 29 41 35 36 41" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".5"/>
@@ -238,10 +68,10 @@
             <a href="#menu" data-i18n="navMenu">Menu</a>
             <a href="#story" data-i18n="navStory">Our story</a>
             <a href="#visit" data-i18n="navVisit">Locations</a>
-            <a href="#popular-items" data-i18n="navOrder">Order online</a>
+            <a href="#menu" data-i18n="navOrder">Order online</a>
             <a href="#visit" data-i18n="navContact">Contact</a>
           </nav>
-          <a class="nav-cta" href="#popular-items"><svg class="bag-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 8h15l-1 13h-13l-1-13Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><span data-i18n="navCta">Order now</span></a>
+          <a class="nav-cta" href="#menu"><svg class="bag-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 8h15l-1 13h-13l-1-13Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><span data-i18n="navCta">Order now</span></a>
           <div class="language-switch" role="group" aria-label="Select language" data-i18n-aria-label="languageLabel">
             <button type="button" data-language="en" aria-pressed="true">EN</button>
             <span aria-hidden="true">|</span>
@@ -260,7 +90,7 @@
             <svg class="doodle hero-crown" aria-hidden="true"><use href="#i-crown"/></svg>
             <h1 id="hero-title" data-i18n-html="heroTitle">NASHVILLE<br><span>CHICKEN</span></h1>
             <p class="hero-tagline" data-i18n-html="heroDescription"><span>REAL CHICKEN.</span><span>REAL CRUNCH.</span><span>REAL NASHVILLE HEAT.</span></p>
-            <a class="button button-orange" href="#popular-items"><span data-i18n="heroMenuCta">Order now</span><span aria-hidden="true">→</span></a>
+            <a class="button button-orange" href="#menu"><span data-i18n="heroMenuCta">Order now</span><span aria-hidden="true">→</span></a>
           </div>
           <div class="hero-visual">
             <p class="hero-style" aria-hidden="true" data-i18n-html="heroStyle">NASHVILLE<br>STYLE</p>
@@ -298,78 +128,113 @@
         </article>
       </section>
 
-      <section class="category-section page-wrap" id="menu" aria-label="Explore the menu" data-i18n-aria-label="menuAria">
-        <div class="category-grid">
-          <a class="category-card" href="#popular-items">
-            <h2 data-i18n-html="categoryTenders">JOE'S <em>TENDERS</em></h2>
-            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-tenders"/></svg></span>
-            <span class="category-link"><span data-i18n="categoryViewTenders">VIEW TENDERS</span><b aria-hidden="true">→</b></span>
-          </a>
-          <a class="category-card" href="#popular-items">
-            <h2 data-i18n-html="categoryBurgers">JOE'S <em>BURGERS</em></h2>
-            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-burger"/></svg></span>
-            <span class="category-link"><span data-i18n="categoryViewBurgers">VIEW BURGERS</span><b aria-hidden="true">→</b></span>
-          </a>
-          <a class="category-card" href="#popular-items">
-            <h2 data-i18n-html="categorySides">SIDES</h2>
-            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-fries"/></svg></span>
-            <span class="category-link"><span data-i18n="categoryViewSides">VIEW SIDES</span><b aria-hidden="true">→</b></span>
-          </a>
-          <a class="category-card" href="#popular-items">
-            <h2 data-i18n-html="categoryShakes">LOADED <em>SHAKES</em></h2>
-            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-shakes"/></svg></span>
-            <span class="category-link"><span data-i18n="categoryViewShakes">VIEW SHAKES</span><b aria-hidden="true">→</b></span>
-          </a>
-        </div>
-      </section>
+      <section class="menu-section page-wrap" id="menu" aria-label="Explore the menu" data-i18n-aria-label="menuAria">
+        <div class="menu-board">
+          <header class="menu-board-header">
+            <h2 id="menu-title" data-i18n="menuBoardTitle">JOE'S MENU</h2>
+            <p class="menu-board-ribbon" data-i18n-html="menuBoardRibbon"><span>NASHVILLE</span> CHICKEN</p>
+          </header>
 
-      <section class="heat-section page-wrap" aria-labelledby="heat-title">
-        <div class="heat-heading">
-          <svg class="doodle heat-crown" aria-hidden="true"><use href="#i-crown"/></svg>
-          <h2 id="heat-title" data-i18n-html="heatTitle">CHOOSE<br>YOUR <em>HEAT</em></h2>
-          <p class="heat-intro" data-i18n="heatIntro">Five levels, from no heat to Carolina Reaper.</p>
-        </div>
-        <div class="heat-guide">
-          <svg class="doodle heat-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
-          <figure class="heat-photo">
-            <picture>
-              <source type="image/avif" srcset="assets/images/heat_levels-480.avif 480w, assets/images/heat_levels-800.avif 800w, assets/images/heat_levels-1086.avif 1086w" sizes="(max-width: 560px) calc(100vw - 30px), (max-width: 700px) min(calc(100vw - 40px), 420px), (max-width: 900px) min(44vw, 340px), (max-width: 1180px) 38vw, 450px">
-              <source type="image/webp" srcset="assets/images/heat_levels-480.webp 480w, assets/images/heat_levels-800.webp 800w, assets/images/heat_levels-1086.webp 1086w" sizes="(max-width: 560px) calc(100vw - 30px), (max-width: 700px) min(calc(100vw - 40px), 420px), (max-width: 900px) min(44vw, 340px), (max-width: 1180px) 38vw, 450px">
-              <img src="assets/images/heat_levels-800.jpg" srcset="assets/images/heat_levels-480.jpg 480w, assets/images/heat_levels-800.jpg 800w, assets/images/heat_levels-1086.jpg 1086w" sizes="(max-width: 560px) calc(100vw - 30px), (max-width: 700px) min(calc(100vw - 40px), 420px), (max-width: 900px) min(44vw, 340px), (max-width: 1180px) 38vw, 450px" alt="Five Nashville-style chicken tenders arranged from No Heat to Game Over, with fries and dip." data-i18n-alt="heatPhotoAlt" width="1086" height="1448" loading="lazy">
-            </picture>
-          </figure>
-          <ol class="heat-levels" role="list" aria-label="Available spice levels, from no heat to Reaper" data-i18n-aria-label="heatAria">
-            <li class="heat-none"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatNone">NO HEAT</span></span></li>
-            <li class="heat-mild"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatMild">MILD</span></span></li>
-            <li class="heat-hot"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatHot">HOT</span></span></li>
-            <li class="heat-extra"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatExtra">EXTRA HOT</span></span></li>
-            <li class="heat-reaper"><span class="heat-level-copy"><span class="heat-level-label" data-i18n="heatReaper">GAME OVER</span><small data-i18n="heatReaperSub">BY CAROLINA REAPER</small></span></li>
-          </ol>
-        </div>
-      </section>
+          <div class="menu-board-layout">
+            <div class="menu-meal-grid">
+              <article class="menu-meal">
+                <div class="menu-meal-copy">
+                  <h3 data-i18n="menuTenders">JOE'S TENDERS</h3>
+                  <p class="menu-price">3490 <small>FT</small></p>
+                  <ul class="menu-includes">
+                    <li data-i18n="tendersDetail1">2 JUMBO TENDERS</li>
+                    <li data-i18n="sharedFries">FRESH-CUT FRIES</li>
+                    <li data-i18n="sharedSauce">JOE'S SAUCE</li>
+                    <li data-i18n="tendersDetail4">PICKLES</li>
+                  </ul>
+                </div>
+                <figure class="menu-meal-art">
+                  <img src="assets/images/menu-tenders.webp" alt="Chicken tenders, fresh-cut fries, pickles and sauce on branded paper." data-i18n-alt="tendersAlt" width="380" height="223" loading="lazy">
+                </figure>
+              </article>
 
-      <section class="popular-section page-wrap" id="popular-items" aria-labelledby="popular-title">
-        <div class="section-heading">
-          <h2 id="popular-title"><span data-i18n="popularTitle">POPULAR ITEMS</span><svg class="doodle popular-crown" aria-hidden="true"><use href="#i-crown"/></svg></h2>
-          <a class="paint-link" href="#menu"><span data-i18n="popularCta">VIEW FULL MENU</span><b aria-hidden="true">→</b></a>
-        </div>
-        <div class="popular-grid">
-          <article class="popular-card">
-            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-tenders"/></svg></span>
-            <h3 data-i18n="popularTenders">JOE'S TENDERS</h3><p class="price">3490 <small>FT</small></p>
-          </article>
-          <article class="popular-card">
-            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-burger"/></svg></span>
-            <h3 data-i18n="popularBurger">JOE'S BURGER</h3><p class="price">3490 <small>FT</small></p>
-          </article>
-          <article class="popular-card">
-            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-burger-extra"/></svg></span>
-            <h3 data-i18n="popularExtra">JOE'S BURGER EXTRA</h3><p class="price">5590 <small>FT</small></p>
-          </article>
-          <article class="popular-card">
-            <span class="food-art" aria-hidden="true"><svg viewBox="0 0 240 160"><use href="#food-loaded"/></svg></span>
-            <h3 data-i18n="popularLoadedFries">LOADED FRIES</h3><p class="price">2790 <small>FT</small></p>
-          </article>
+              <article class="menu-meal">
+                <div class="menu-meal-copy">
+                  <h3 data-i18n="menuBurger">JOE'S BURGER</h3>
+                  <p class="menu-price">3490 <small>FT</small></p>
+                  <ul class="menu-includes">
+                    <li data-i18n="burgerDetail1">POTATO BUN BURGER</li>
+                    <li data-i18n="sharedFries">FRESH-CUT FRIES</li>
+                    <li data-i18n="sharedSauce">JOE'S SAUCE</li>
+                  </ul>
+                </div>
+                <figure class="menu-meal-art">
+                  <img src="assets/images/menu-burger.webp" alt="Chicken burger with fries and sauce on branded paper." data-i18n-alt="burgerAlt" width="386" height="219" loading="lazy">
+                </figure>
+              </article>
+
+              <article class="menu-meal">
+                <div class="menu-meal-copy">
+                  <h3 data-i18n="menuMix">JOE'S MIX</h3>
+                  <p class="menu-price">4490 <small>FT</small></p>
+                  <ul class="menu-includes">
+                    <li data-i18n="mixDetail1">1 JUMBO TENDER</li>
+                    <li data-i18n="mixDetail2">1 BURGER W/ POTATO BUN</li>
+                    <li data-i18n="sharedFries">FRESH-CUT FRIES</li>
+                    <li data-i18n="sharedSauce">JOE'S SAUCE</li>
+                    <li data-i18n="mixDetail5">PICKLE</li>
+                  </ul>
+                </div>
+                <figure class="menu-meal-art">
+                  <img src="assets/images/menu-mix.webp" alt="A chicken tender and chicken burger with fries, pickles and sauce." data-i18n-alt="mixAlt" width="355" height="221" loading="lazy">
+                </figure>
+              </article>
+
+              <article class="menu-meal">
+                <div class="menu-meal-copy">
+                  <h3 data-i18n="menuBurgerExtra">JOE'S BURGER EXTRA</h3>
+                  <p class="menu-price">5590 <small>FT</small></p>
+                  <ul class="menu-includes">
+                    <li data-i18n="burgerExtraDetail1">2 BURGERS W/ POTATO BUN</li>
+                    <li data-i18n="sharedFries">FRESH-CUT FRIES</li>
+                    <li data-i18n="sharedSauce">JOE'S SAUCE</li>
+                  </ul>
+                </div>
+                <figure class="menu-meal-art">
+                  <img src="assets/images/menu-burger-extra.webp" alt="Two chicken burgers with fries and sauce on branded paper." data-i18n-alt="burgerExtraAlt" width="395" height="215" loading="lazy">
+                </figure>
+              </article>
+            </div>
+
+            <aside class="menu-heat" aria-labelledby="heat-title">
+              <svg class="doodle menu-heat-crown" aria-hidden="true"><use href="#i-crown"/></svg>
+              <h3 id="heat-title" data-i18n-html="heatTitle">CHOOSE<br>YOUR <em>HEAT</em></h3>
+              <ol class="menu-heat-levels" aria-label="Available spice levels, from no heat to Reaper" data-i18n-aria-label="heatAria">
+                <li class="heat-none">
+                  <span class="heat-label" data-i18n="heatNone">NO HEAT</span>
+                  <span class="heat-peppers" aria-hidden="true"><svg class="heat-pepper"><use href="#i-pepper"/></svg></span>
+                </li>
+                <li class="heat-mild">
+                  <span class="heat-label" data-i18n="heatMild">MILD</span>
+                  <span class="heat-peppers" aria-hidden="true"><svg class="heat-pepper"><use href="#i-pepper"/></svg></span>
+                </li>
+                <li class="heat-hot">
+                  <span class="heat-label" data-i18n="heatHot">HOT</span>
+                  <span class="heat-peppers" aria-hidden="true"><svg class="heat-pepper"><use href="#i-pepper"/></svg></span>
+                </li>
+                <li class="heat-extra">
+                  <span class="heat-label" data-i18n="heatExtra">EXTRA HOT</span>
+                  <span class="heat-peppers" aria-hidden="true"><svg class="heat-pepper"><use href="#i-pepper"/></svg><svg class="heat-pepper"><use href="#i-pepper"/></svg></span>
+                </li>
+                <li class="heat-reaper">
+                  <span class="heat-reaper-copy">
+                    <span class="heat-label" data-i18n="heatReaper">GAME OVER</span>
+                    <span class="heat-reaper-sub" data-i18n="heatReaperSub">BY CAROLINA REAPER</span>
+                  </span>
+                  <span class="heat-peppers" aria-hidden="true"><svg class="heat-flame"><use href="#i-flame"/></svg><svg class="heat-pepper"><use href="#i-pepper"/></svg></span>
+                </li>
+              </ol>
+            </aside>
+          </div>
+
+          <footer class="menu-board-footer">
+            <p data-i18n-html="menuBoardTagline">REAL CHICKEN. REAL CRUNCH. REAL <em>NASHVILLE HEAT.</em></p>
+          </footer>
         </div>
       </section>
 
